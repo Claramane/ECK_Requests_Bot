@@ -92,8 +92,12 @@ def get_data(ChartNo):
     # print(df['LabDataList'])
     LabData_df = []
     for i in df['LabDataList']:
-        data = [i['ItemName'],i['ItemValue'],i['CheckDate']]
-        LabData_df.append(data)
+        if i['IsNormal'] == True:
+            data = [i['ItemName'],i['ItemValue'],i['CheckDate']]
+            LabData_df.append(data)
+        else:
+            data = [i['ItemName'],"*"+i['ItemValue'],i['CheckDate']]
+            LabData_df.append(data)
     LabData_df = pd.DataFrame(LabData_df)
     LabData_df.columns = ["ItemName", "ItemValue", "CheckDate"]
     # LabData_df.set_index("ItemName", inplace=True)
